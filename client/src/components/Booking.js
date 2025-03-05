@@ -81,25 +81,29 @@ const BookingDetails = () => {
           </div>
         </CardHeader>
   
-        <CardContent className="p-6 space-y-8">
+        <CardContent className=" mx-7 p-6 space-y-8">
           {/* Artist Info */}
-          <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 p-6 bg-gray-50 rounded-xl">
+<div className="flex flex-col sm:flex-row items-center sm:items-start gap-16 p-6 bg-gray-50 rounded-xl  sm:w-[100%]">
   {/* Profile Image Container */}
-  <div className="w-36 h-48 rounded-lg overflow-hidden flex-shrink-0"> {/* Increased size for a larger image */}
+  <div className="w-50 h-48 rounded-xl overflow-hidden flex-shrink-0"> 
     <img 
-      src="/api/placeholder/128/128" 
+      src="/images-2.jpeg" 
       alt="Artist" 
       className="w-full h-full object-cover"
     />
   </div>
 
   {/* Artist Details */}
-  <div className="text-center sm:text-left">
+  <div className="text-center sm:text-left mt-5">
     <h2 className="text-xl font-semibold text-gray-900">Artist Name</h2>
-    <p className="text-rose-600 text-lg font-medium mt-2">₹5,000 Per Hour</p>
-    <p className="text-sm text-gray-600 mt-1">(Includes all Taxes)</p>
+    <p className="text-lg font-normal mt-1">Singer</p>
+    <p className="text-lg font-medium mt-1">Rating: 4.5/5</p>
+    <p className="text-rose-600 text-lg font-medium mt-1">₹5,000 Per Hour</p>
+    <p className="text-sm text-gray-600 ">(Includes all the Taxes)</p>
+   
   </div>
 </div>
+
           {/* Form Fields */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left Section: Name, Event Type, Audience Size */}
@@ -154,6 +158,16 @@ const BookingDetails = () => {
                   <ChevronDown className="w-5 h-5" />
                 </div>
               </div>
+
+
+              {/* Name Input */}
+              <input
+                type="text"
+                placeholder="Any message for the Artist (Optional)"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full p-4 border border-gray-200 rounded-xl focus:border-rose-500 focus:ring-2 focus:ring-rose-200 focus:outline-none transition-colors"
+              />
             </div>
   
             {/* Right Section: Date & Time */}
@@ -201,6 +215,15 @@ const BookingDetails = () => {
   </div>
 )}
 
+{/* Duration */}
+<input
+                type="text"
+                placeholder="Duration of Event"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full p-4 border border-gray-200 rounded-xl focus:border-rose-500 focus:ring-2 focus:ring-rose-200 focus:outline-none transition-colors"
+              />
+
 {/* Location Section */}
 <div className="mt-4">
   <button
@@ -213,33 +236,41 @@ const BookingDetails = () => {
 </div>
             </div>
           </div>
+
+
+         {/* Submit Button */}
+<button className="w-[50%] mx-auto bg-rose-600 hover:bg-rose-700 text-white py-3.5 rounded-xl font-semibold text-lg transition-colors focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 block">
+  Customize Sound System
+</button>
+
   
           
   
           {/* Payment Section */}
-          <div className="pt-6">
-            <h2 className="text-xl font-semibold mb-4">Payment Information</h2>
+          <div className="pt-10">
+            <h2 className="text-xl font-semibold mb-1">Payment Information</h2>
+            <div className="text-gray-400 mb-5">Doubts regarding Artist, Cancilation and Refunds refer to FAQ and Customer Support </div>
             
             <div className="space-y-4 bg-gray-50 p-6 rounded-xl">
-              <div className="flex justify-between">
+              <div className="flex justify-between mr-20">
                 <span className="text-gray-600">Total Price for the artist:</span>
                 <span className="font-medium">₹5,000</span>
               </div>
   
               {hasSoundSystem && (
                 <>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between mr-20">
                     <span className="text-gray-600">Sound system price:</span>
                     <span className="font-medium">₹2,000</span>
                   </div>
-                  <button className="flex items-center text-blue-600 hover:text-blue-700 transition-colors">
+                  <button className="flex items-center text-blue-600 hover:text-blue-700 transition-colors mr-20">
                     <span className="mr-2">See what's included</span>
                     <Info size={16} className="text-rose-500" />
                   </button>
                 </>
               )}
   
-              <div className="flex justify-between items-center text-sm">
+              <div className="flex justify-between items-center text-sm mr-20">
                 <span className="text-gray-600 italic">Have your own sound system?</span>
                 <button 
                   onClick={() => setHasSoundSystem(!hasSoundSystem)}
@@ -249,20 +280,21 @@ const BookingDetails = () => {
                 </button>
               </div>
   
-              <div className="border-t border-gray-200 pt-4 mt-4">
+              <div className="border-t border-gray-200 pt-4 mt-4 mr-20">
                 <div className="flex justify-between font-semibold text-lg">
                   <span>Total Amount Payable:</span>
                   <span>₹7,000</span>
                 </div>
-                <p className="text-sm text-gray-600 mt-1">(Includes all taxes)</p>
+                <p className="text-sm text-gray-600 mt-1 mr-20">(Includes all taxes)</p>
               </div>
             </div>
           </div>
   
-          {/* Submit Button */}
-          <button className="w-full bg-rose-500 hover:bg-rose-600 text-white py-4 rounded-xl font-semibold text-lg transition-colors focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2">
-            Proceed To Payment
-          </button>
+           {/* Submit Button */}
+<button className="w-[70%] mx-auto bg-rose-600 hover:bg-rose-700 text-white py-3.5 rounded-xl font-semibold text-lg transition-colors focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 block">
+  Proceed to Payment
+</button>
+
         </CardContent>
       </Card>
   
