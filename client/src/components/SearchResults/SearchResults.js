@@ -91,14 +91,14 @@ const SearchResults = () => {
       </div>
 
       {/* Full-width Image with Centered Heading */}
-      <div className="relative w-full h-[400px] overflow-hidden">
+      <div className="relative w-full h-[550px] overflow-hidden">
         <img 
-          src="/path/to/your/image.jpg" 
+          src="/gama-films-IbOcKJsFInE-unsplash.jpg" 
           alt="Header Background" 
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <h2 className="text-4xl font-bold text-white">Discover Artists</h2>
+          <h2 className="text-6xl mt-60 font-medium text-white">Live Singers In Chandigarh</h2>
         </div>
       </div>
 
@@ -136,43 +136,70 @@ const SearchResults = () => {
     <h3 className="text-lg font-medium mb-4">Filters</h3>
 
     {/* Location Filter */}
-    <div className="mb-6">
-      <h4 className="text-md font-medium mb-2">Location</h4>
-      <div className="relative">
-        <select className="w-full p-3 border border-gray-400 rounded-xl bg-white pr-10 pl-3">
-          <option value="">Select Location</option>
-          {locations.map((city) => (
-            <option key={city} value={city}>{city}</option>
-          ))}
-        </select>
-      </div>
+<div className="mb-6">
+  <h4 className="text-md font-medium mb-2">Location</h4>
+  <div className="relative">
+    <select className="w-full p-3 border border-gray-300 rounded-xl bg-white appearance-none 
+      focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500
+      text-gray-700 cursor-pointer
+      pr-8">
+      <option value="">Select Location</option>
+      {locations.map((city) => (
+        <option key={city} value={city}>{city}</option>
+      ))}
+    </select>
+    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+      </svg>
     </div>
+  </div>
+</div>
 
-    {/* Category Filter */}
-    <div className="mb-6">
-      <h4 className="text-md font-medium mb-2">Category</h4>
-      <div className="relative">
-        <select className="w-full p-3 border border-gray-400 rounded-xl bg-white pr-10 pl-3" onChange={(e) => setSelectedCategory(e.target.value)}>
-          <option value="">All Categories</option>
-          {Object.keys(categories).map((category) => (
-            <option key={category} value={category}>{category}</option>
-          ))}
-        </select>
-      </div>
+{/* Category Filter */}
+<div className="mb-6">
+  <h4 className="text-md font-medium mb-2">Category</h4>
+  <div className="relative">
+    <select className="w-full p-3 border border-gray-300 rounded-xl bg-white appearance-none 
+      focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500
+      text-gray-700 cursor-pointer
+      pr-8"
+      onChange={(e) => setSelectedCategory(e.target.value)}>
+      <option value="">All Categories</option>
+      {Object.keys(categories).map((category) => (
+        <option key={category} value={category}>{category}</option>
+      ))}
+    </select>
+    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+      </svg>
     </div>
+  </div>
+</div>
 
-    {/* Genre Filter */}
-    <div className="mb-6">
-      <h4 className="text-md font-medium mb-2">Genre</h4>
-      <div className="relative">
-        <select className="w-full p-3 border border-gray-400 rounded-xl bg-white pr-10 pl-3" value={selectedGenre} onChange={(e) => setSelectedGenre(e.target.value)}>
-          <option value="">Select Genre</option>
-          {(categories[selectedCategory] || []).map((genre) => (
-            <option key={genre} value={genre}>{genre}</option>
-          ))}
-        </select>
-      </div>
+{/* Genre Filter */}
+<div className="mb-6">
+  <h4 className="text-md font-medium mb-2">Genre</h4>
+  <div className="relative">
+    <select className="w-full p-3 border border-gray-300 rounded-xl bg-white appearance-none 
+      focus:outline-none focus:border-rose-500 focus:ring-1 focus:ring-rose-500
+      text-gray-700 cursor-pointer
+      pr-8"
+      value={selectedGenre} 
+      onChange={(e) => setSelectedGenre(e.target.value)}>
+      <option value="">Select Genre</option>
+      {(categories[selectedCategory] || []).map((genre) => (
+        <option key={genre} value={genre}>{genre}</option>
+      ))}
+    </select>
+    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+      </svg>
     </div>
+  </div>
+</div>
 
     {/* Pricing Filter */}
     <div className="mb-6">

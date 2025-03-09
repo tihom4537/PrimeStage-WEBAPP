@@ -7,6 +7,8 @@ import { AuthProvider } from './context/AuthContext';
 import CompanyPoliciesPage from './components/HomePage/comanyPolicy';
 import TermAndCondition from './components/HomePage/termsAndCondition';
 import RefundPolicy from './components/HomePage/refundPolicy';
+import BookingsAndPerformancePage from './components/HomePage/Shipping_delivery';
+import ContactUsPage from './components/HomePage/contact_us';
 
 function App() {
   return (
@@ -20,7 +22,8 @@ function App() {
         <Route path="/company-policies" element={<CompanyPoliciesPage />} />
         <Route path="/term-conditions" element={< TermAndCondition />} />
         <Route path="/refund-policy" element={< RefundPolicy />} />
-        
+        <Route path="/Shipping-delivery" element={< BookingsAndPerformancePage/>} />
+        <Route path="/contact-us" element={<ContactUsPage/>} />
       </Routes>
     </BrowserRouter>
      </AuthProvider>
