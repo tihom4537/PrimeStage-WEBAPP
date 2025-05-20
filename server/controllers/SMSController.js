@@ -4,7 +4,7 @@ const { body, validationResult } = require('express-validator');
 
 class SMSController {
     constructor() {
-        this.apiKey = 'JCaeWvZzG3lqA1sXgwn8LQSx5VkUyiR0rmFK6tfjb7BI9MuNOTtZRiuoBUIjx7PmvSCrNa3w8n6H5QDc';
+        this.apiKey = 'MhWCaEPDK6v1U7BtpOgkbRnlNrL8HucXjQw2TmiGJdY5z0I43sRh0kPpSEvt54TnmGVfUgKNoi86sFy9';
         this.baseUrl = 'https://www.fast2sms.com/dev/bulkV2';
         this.specialNumbers = {
             '9999999999': '123456' // Add your special numbers here
@@ -63,8 +63,8 @@ class SMSController {
                     errors: errors.array()
                 });
             }
-
             const phone = req.body.numbers;
+           
 
             // Handle special test numbers
             if (this.specialNumbers[phone]) {
@@ -77,6 +77,7 @@ class SMSController {
 
             // Generate OTP
             const otp = String(Math.floor(100000 + Math.random() * 900000));
+            
 
             // Send OTP via Fast2SMS
             const response = await axios.get(this.baseUrl, {
@@ -88,7 +89,7 @@ class SMSController {
                     flash: '0'
                 }
             });
-
+           
             if (response.data.return === true) {
                 this.storeOTP(phone, otp);
                 return res.status(200).json({
@@ -102,10 +103,12 @@ class SMSController {
                 });
             }
         } catch (error) {
+             console.log(error);
             return res.status(500).json({
                 message: 'An error occurred while sending OTP',
-                error: error.message
+                error: error.message,
             });
+            
         }
     }
 

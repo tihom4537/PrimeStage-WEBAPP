@@ -9,7 +9,7 @@ import LatestArtists from './latest_artist';
 import BestTeam from './BestTeam';
 import BestArtist from './BestArtist';
 import Footer from './footer';
-import MovingBoxes from './testimonials';
+// import MovingBoxes from './testimonials';
 
 const HomePage = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -28,14 +28,14 @@ const HomePage = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Auto-advance slides
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % 5); // 5 is the number of featured artists
-    }, 5000);
+  // // Auto-advance slides
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setCurrentSlide((prev) => (prev + 1) % 5); // 5 is the number of featured artists
+  //   }, 5000);
 
-    return () => clearInterval(timer);
-  }, []);
+  //   return () => clearInterval(timer);
+  // }, []);
 
   const mainLogoStyles = {
     transform: `
@@ -65,32 +65,33 @@ const HomePage = () => {
         scrollProgress={scrollProgress} 
         setIsMenuOpen={setIsMenuOpen} 
       />
-      
+
       <NavigationMenu 
         isMenuOpen={isMenuOpen} 
         setIsMenuOpen={setIsMenuOpen} 
       />
-      
+
       <HeroSection mainLogoStyles={mainLogoStyles} />
-      
+
       <FeaturedCategories />
-      
+
       <FeaturedArtists 
-        currentSlide={currentSlide} 
+        // currentSlide={currentSlide} 
       />
-      
+
       <LatestArtists />
 
       <FeaturedArtists2 
-        currentSlide={currentSlide} 
+        // currentSlide={currentSlide} 
       />
       <BestTeam />
       <BestArtist/>
-      <MovingBoxes />
-      
+      {/* <MovingBoxes /> */}
+
       <Footer />
     </div>
   );
 };
 
 export default HomePage;
+

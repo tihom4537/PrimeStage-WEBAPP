@@ -1,6 +1,7 @@
 require('dotenv').config(); // Load environment variables
 const { verifyToken } = require('./controllers/UserController');
 
+
 // // In your routes file
 // router.get('/protected-route', verifyToken, (req, res) => {
 //     // Access authenticated user data through req.user
@@ -14,7 +15,11 @@ const categoryRoutes = require('./routes/categories').default || require('./rout
 const artistRoutes = require('./routes/artist');
 const Auth = require('./routes/otpVerification');
 const login = require('./routes/login');
-
+const qrCodeRoutes = require('./controllers/QRCode');
+const equipmentRoutes = require('./routes/Equipments');
+const notificationRoutes = require('./controllers/notificationController');
+const bookingProcess = require('./routes/bookingProcess');
+const allbooking = require('./routes/allbooking');
 
 const { QueryTypes } = require('sequelize');
 const app = express();
@@ -41,7 +46,7 @@ testDatabaseConnection();
 // CORS Configuration
 app.use(cors({
     origin: "http://localhost:3000", // Your React app URL
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT","PATCH", "DELETE"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization", "x-auth-token"]
 }));
@@ -51,6 +56,12 @@ app.use(cors({
  app.use('/api/login', login);
  app.use('/api/search', artistRoutes);
  app.use('/api/auth', Auth);
+ app.use('/api/payments', qrCodeRoutes);
+ app.use('/api/kits', equipmentRoutes);
+ app.use('/api/notifications', notificationRoutes);
+app.use('/api/booking', bookingProcess);
+app.use('/api/payments', require('./routes/payment'));
+app.use('/api/allbookings', allbooking);
 
 
 // Default Route

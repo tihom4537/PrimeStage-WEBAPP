@@ -89,6 +89,7 @@ exports.fetchArtistsInServiceRegion = async (req, res) => {
             },
             type: QueryTypes.SELECT
         });
+        console.log(artists);
 
         console.log(`✅ Successfully fetched ${artists.length} artists`);
         res.json(artists);
@@ -218,6 +219,7 @@ exports.getFeaturedArtists = async (req, res) => {
             average_rating: artist.average_rating || null
         }));
 
+        console.log(transformedArtists );
         res.json(transformedArtists);
 
     } catch (error) {
@@ -226,5 +228,120 @@ exports.getFeaturedArtists = async (req, res) => {
             error: 'An error occurred while fetching featured artist information.',
             message: error.message
         });
+    }
+};
+
+
+exports.fetchArtistById = async (req, res) => {
+    console.log('⌛ Starting fetchArtistById request...');
+    
+    try {
+        // Set CORS headers
+        // res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+        // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+        // Get artist ID from URL parameter
+        const artistId = req.params.artistId;
+        console.log(req.params);
+        
+        if (!artistId) {
+            console.log('❌ No artist ID provided');
+            return res.status(400).json({ error: 'Artist ID is required' });
+        }
+
+        console.log('📡 Executing database query for artist ID:', artistId);
+
+        // Query to fetch artist with average rating
+        const query = `
+            SELECT 
+                a.*,
+                ROUND(AVG(r.rating), 1) as average_rating
+            FROM 
+                artist_information a
+            LEFT JOIN 
+                reviews r ON a.id = r.artist_id
+            WHERE 
+                a.id = :artistId
+            GROUP BY 
+                a.id
+        `;
+
+        const artists = await sequelize.query(query, {
+            replacements: {
+                artistId: artistId
+            },
+            type: QueryTypes.SELECT
+        });
+
+        if (artists.length === 0) {
+            console.log('❌ No artist found with ID:', artistId);
+            return res.status(404).json({ error: 'Artist not found' });
+        }
+
+        const artist = artists[0];
+        console.log('✅ Successfully fetched artist details');
+        res.json(artist);
+
+    } catch (error) {
+        console.error('❌ Database Query Error:', error);
+        res.status(500).json({ error: error.message });
+    }
+};
+
+
+
+exports.fetchTeamById = async (req, res) => {
+    console.log('⌛ Starting fetchTeamById request...');
+    
+    try {
+        // Set CORS headers
+        // res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+        // res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+        // Get artist ID from URL parameter
+        const artistId = req.params.artistId;
+        console.log(req.params);
+        
+        if (!artistId) {
+            console.log('❌ No Team ID provided');
+            return res.status(400).json({ error: 'Team ID is required' });
+        }
+
+        console.log('📡 Executing database query for Team ID:', artistId);
+
+        // Query to fetch artist with average rating
+        const query = `
+            SELECT 
+                a.*,
+                ROUND(AVG(r.rating), 1) as average_rating
+            FROM 
+                artist_team_information a
+            LEFT JOIN 
+                reviews r ON a.id = r.team_id
+            WHERE 
+                a.id = :artistId
+            GROUP BY 
+                a.id
+        `;
+
+        const artists = await sequelize.query(query, {
+            replacements: {
+                artistId: artistId
+            },
+            type: QueryTypes.SELECT
+        });
+
+        if (artists.length === 0) {
+            console.log('❌ No Team found with ID:', artistId);
+            return res.status(404).json({ error: 'Team not found' });
+        }
+
+        const artist = artists[0];
+        console.log('✅ Successfully fetched team details');
+        res.json(artist);
+
+    } catch (error) {
+        console.error('❌ Database Query Error:', error);
+        res.status(500).json({ error: error.message });
     }
 };

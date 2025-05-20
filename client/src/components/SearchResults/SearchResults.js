@@ -7,6 +7,12 @@ const SearchResults = () => {
   const navigate = useNavigate();
   const artists = location.state?.artists || [];
 
+  const handleArtistClick = (artist) => {
+    navigate(`/artists/${artist.id}`, { 
+      state: { artist } 
+    });
+  };
+
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
   const [selectedPrice, setSelectedPrice] = useState(0);
@@ -222,30 +228,37 @@ const SearchResults = () => {
 
         {/* Results Section */}
         <div className="w-full md:w-3/4">
-          <div className="mb-6">
-            <p className="text-gray-600 font-light">{artists.length} {artists.length === 1 ? 'artist' : 'artists'} found</p>
+      <div className="mb-6">
+        <p className="text-gray-600 font-light">
+          {artists.length} {artists.length === 1 ? 'artist' : 'artists'} found
+        </p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {artists.map((artist) => (
+          
+<div 
+  key={artist.id} 
+  className="group bg-white cursor-pointer rounded-2xl shadow hover:shadow-md transition w-full"
+  onClick={() => handleArtistClick(artist)}
+>
+            <div className="relative w-full h-[375px] overflow-hidden mb-4 rounded-t-2xl">
+              <img
+                src={artist.profile_photo || "/api/placeholder/400/300"}
+                alt={artist.name}
+                className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform rounded-t-2xl"
+                onError={(e) => e.target.src = "/api/placeholder/400/300"}
+              />
+            </div>
+            <div className="px-4 pb-4">
+              <h3 className="text-lg font-medium">{artist.name}</h3>
+              <p className="text-gray-600">{artist.skill_category}</p>
+              <p className="text-sm text-gray-500">{formatSkills(artist.skills)}</p>
+              <p className="text-primary font-medium">{formatPrice(artist.price_per_hour)}/hr</p>
+            </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {artists.map((artist) => (
-              <div key={artist.id} className="group bg-white cursor-pointer rounded-2xl shadow hover:shadow-md transition w-full">
-                <div className="relative w-full h-[375px] overflow-hidden mb-4 rounded-t-2xl">
-                  <img 
-                    src={artist.profile_photo || "/api/placeholder/400/300"} 
-                    alt={artist.name} 
-                    className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform rounded-t-2xl" 
-                    onError={(e) => e.target.src = "/api/placeholder/400/300"} 
-                  />
-                </div>
-                <div className="px-4 pb-4">
-                  <h3 className="text-lg font-medium">{artist.name}</h3>
-                  <p className="text-gray-600">{artist.skill_category}</p>
-                  <p className="text-sm text-gray-500">{formatSkills(artist.skills)}</p>
-                  <p className="text-primary font-medium">{formatPrice(artist.price_per_hour)}/hr</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
+      </div>
+    </div>
       </div>
     </div>
   );
