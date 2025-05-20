@@ -4,13 +4,13 @@ const Razorpay = require('razorpay');
 const crypto = require('crypto');
 const { v4: uuidv4 } = require('uuid');
 const paymentService = require('./paymentService');
+require('dotenv').config();
 
 // Initialize Razorpay
 const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID || 'rzp_test_Hb4hFCm46361XC',
-  key_secret: process.env.RAZORPAY_KEY_SECRET || 'QXJiLk56a1KPl8HBOxAuKDB8'
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET
 });
-
 /**
  * Create a Razorpay order
  */
@@ -56,7 +56,7 @@ exports.createOrder = async (req, res) => {
       order_id: order.id,
       currency: order.currency,
       amount: order.amount / 100, // Convert back to main currency unit for display
-      key: process.env.RAZORPAY_KEY_ID || 'rzp_test_Hb4hFCm46361XC'
+      key: process.env.RAZORPAY_KEY_ID 
     });
   } catch (error) {
     console.error('❌ Error creating Razorpay order:', error);

@@ -3,6 +3,7 @@
 const sequelize = require('../config/database_conn');
 const { QueryTypes } = require('sequelize');
 
+
 /**
  * Create a new payment entry in the database
  */
